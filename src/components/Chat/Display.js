@@ -7,7 +7,6 @@ const Display = ({messages}) => {
   const messageDisplay = useRef();
 
   useEffect(()=>{
-    console.log(messageDisplay.current);
     messageDisplay.current.scrollTo(0, messageDisplay.current.scrollHeight )
   },[messages])
 

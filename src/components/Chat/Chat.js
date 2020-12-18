@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Display from "./Display";
-import {messagesPlaceholder} from "./Placeholder";
+import { useSocket } from "../../context/SocketProvider";
+import { useGamesContext } from "../../context/GamesContextProvider";
 
 const Chat = () => {
   const [msg, setMsg] = useState("");
-  const [messages, setMessages] = useState(messagesPlaceholder);
+  const [messages, setMessages] = useState([]);
+  const {currentRoom} = useGamesContext();
 
-  const sendMessage = (e) => {
+
+  const { sendMessage, socket } = useSocket();
+  useEffect(() => {
+    if (socket && currentRoom) {
+      socket.on(`getMessage/${currentRoom}`, ({msg}) => {
+        console.log(msg)
+        setMessages(items=>items.concat(msg))
+      });
+    }
+    return ()=>{
+      if(socket){
+        socket.removeListener(`getMessage/${currentRoom}`)
+      }
+    } 
+   
+  }, [socket,currentRoom]);
+
+  const sendMessageHandler = (e) => {
     e.preventDefault();
     if (msg.trim() !== "") {
       const msgObj = {
@@ -14,31 +33,27 @@ const Chat = () => {
         author: "You",
         id: Math.random(),
       };
-      setMessages((items) => items.concat(msgObj));
+      sendMessage(msgObj);
       setMsg("");
     }
   };
 
-
-
   return (
     <div className="chat">
-      <Display messages={messages}/>
-        <form className="chat__bottom" onSubmit={sendMessage}>
-          <input
-            value={msg}
-            placeholder="Send a Message"
-            onChange={(e) => setMsg(e.target.value)}
-            type="text"
-          />
-          <button type="submit" className="btn">
-            Send
-          </button>
-        </form>
-      </div>
+      <Display messages={messages} />
+      <form className="chat__bottom" onSubmit={sendMessageHandler}>
+        <input
+          value={msg}
+          placeholder="Send a Message"
+          onChange={(e) => setMsg(e.target.value)}
+          type="text"
+        />
+        <button type="submit" className="btn">
+          Send
+        </button>
+      </form>
+    </div>
   );
 };
 
-
-
-export default Chat;
+export default React.memo(Chat);
