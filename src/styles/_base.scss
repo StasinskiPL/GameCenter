@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,700;1,900&display=swap');
+
+
+// variables 
+$color-main : #FFF5F5;
+$color-main-dark : #B89E97;
+$color-dark: #363636;
+$color-white: #FAFaFF;
+
+
+$mediumSize: 780px;
+$deskopSize: 1022px;
+
+$maxWidth : 1200px;
+
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;   
+}
+
+main{
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background-color: $color-main;
+}
+
+@mixin  maxWidth {
+    max-width: $maxWidth;
+    margin: 0 auto;
+    
+}
+
+@mixin link {
+    text-decoration: none;
+    color: $color-dark;
+}
+
+@mixin mediaQuery($size) {
+    @media screen and (min-width:$size) {
+        @content;
+    }
+}
+
+@mixin mediumSize {
+    @media screen and (min-width:$mediumSize) {
+        @content;
+    }
+}
+
+@mixin deskopSize {
+    @media screen and (min-width:$deskopSize) {
+        @content;
+    }
+}
+
+@mixin darkOnHover($color: $color-white ){
+    transition: color 300ms ease-in-out;
+    &:hover{
+    color: darken($color,20);
+    }
+}
+
+@mixin lightenOnHover($color : $color-dark){
+    transition: color 300ms ease-in-out;
+    &:hover{
+        color:  lighten($color,20);
+    }
+}
+
+
+
+
+
+

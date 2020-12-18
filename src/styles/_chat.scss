@@ -1,0 +1,58 @@
+.chat {
+  background-color: darken($color-white, 1.5);
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  &__display {
+    position: relative;
+    height: 370px;
+    &-center {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      overflow: auto;
+      max-height: 370px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid $color-dark;
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    & input {
+
+      padding-left: 0.5rem;
+      border: none;
+      font-family: inherit;
+      font-size: 1.5rem;
+    }
+    & button {
+      @include lightenOnHover;
+      font-family: inherit;
+      font-weight: 700;
+      background-color: transparent;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.message {
+  margin: 0.75rem;
+  display: flex;
+  &.your {
+    justify-content: flex-end;
+  }
+  &__center {
+    max-width: 48%;
+  }
+  &-text {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    display: inline-block;
+    background-color: #fff;
+  }
+}

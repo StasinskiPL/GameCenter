@@ -1,0 +1,98 @@
+.lobby {
+  &__center {
+    @include maxWidth;
+    padding: 5rem 0.5rem;
+  }
+
+  &-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 3px solid $color-dark;
+
+    & h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      font-style: italic;
+    }
+  }
+
+  &-btn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.25rem;
+    background-color: rgb(142, 235, 142);
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 10rem;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+    color: $color-dark;
+    @include lightenOnHover;
+    transition: all 300ms ease-in-out;
+    &:hover {
+      color: lighten($color-dark, 20);
+      background-color: rgb(86, 233, 86);
+    }
+  }
+  &-btn.disable {
+    background-color: rgb(228, 109, 109);
+    color: lighten($color-dark, 0);
+    cursor: not-allowed;
+  }
+
+  &__link {
+    margin-top: 1rem;
+    border: 2px solid $color-dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-box {
+      background-color: $color-main-dark;
+      padding: 0.25rem 2rem;
+      padding-right: 3.5rem;
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+
+      & h1 {
+        font-size: 1.5rem;
+        @include mediumSize() {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    & p {
+      display: none;
+      color: rgb(30, 0, 112);
+      @include deskopSize() {
+        display: initial;
+      }
+    }
+
+    & button {
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      background-color: $color-main-dark;
+      border: none;
+      height: 100%;
+      padding: 0.25rem 2rem;
+      padding-left: 3.5rem;
+      clip-path: polygon(18% 0%, 100% 0, 100% 100%, 0% 100%);
+      font-size: 1.5rem;
+      @include mediumSize() {
+        font-size: 2rem;
+      }
+    }
+  }
+  &__body{
+      margin-top: 2rem;
+        display: grid;
+        gap: 1.5rem;
+        @include mediumSize(){
+            grid-template-columns: 1fr 1fr;
+        }
+
+  }
+}
