@@ -9,11 +9,11 @@ import GamesContextProvider from "./context/GamesContextProvider"
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <GamesContextProvider>
     <SocketProvider>
+    <GamesContextProvider>
     <App />
-    </SocketProvider>
     </GamesContextProvider>
+    </SocketProvider>
   </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

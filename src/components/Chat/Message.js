@@ -1,16 +1,20 @@
-import React from 'react'
+import React from "react";
+import useUserId from "../../hooks/useUserId";
 
 const Message = ({ msg }) => {
-    const { text, author } = msg;
-    return (
-      <div className={`message ${author === "You" && "your"}`}>
-        <div className="message__center">
-          <div className="message-text">
-            <p> {text} </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const id = useUserId();
+  const { text, authorId, authorNick } = msg;
 
-export default React.memo(Message)
+  return (
+    <div className={`message ${authorId === id && "your"}`}>
+      <div className="message__center">
+        <div className="message-text">
+          <p> {text} </p>
+        </div>
+        {authorId !== id && <p className="message-author">{authorNick}</p>}
+      </div>
+    </div>
+  );
+};
+
+export default React.memo(Message);

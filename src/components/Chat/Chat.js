@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Display from "./Display";
 import { useSocket } from "../../context/SocketProvider";
+import useUserId from "../../hooks/useUserId";
+import useUserNick from "../../hooks/useUserNick";
 import { useGamesContext } from "../../context/GamesContextProvider";
 
 const Chat = () => {
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([]);
   const {currentRoom} = useGamesContext();
+  const userId = useUserId();
+  const [nick ] = useUserNick();
 
 
-  const { sendMessage, socket } = useSocket();
+  const {socket } = useSocket();
   useEffect(() => {
     if (socket && currentRoom) {
       socket.on(`getMessage/${currentRoom}`, ({msg}) => {
-        console.log(msg)
         setMessages(items=>items.concat(msg))
       });
     }
@@ -30,10 +33,11 @@ const Chat = () => {
     if (msg.trim() !== "") {
       const msgObj = {
         text: msg,
-        author: "You",
-        id: Math.random(),
+        authorId: userId,
+        authorNick : nick,
+        id: new Date().getTime(),
       };
-      sendMessage(msgObj);
+      socket.emit("sendMessage", {msg:msgObj, room:currentRoom});
       setMsg("");
     }
   };

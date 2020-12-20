@@ -1,0 +1,59 @@
+.backdrop{
+    z-index: 100;
+    position:fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, .6);
+}
+.setNick{
+    z-index: 101;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    max-width: 560px;
+    height: 100%;
+    max-height: 400px;
+    transform: translate(-50%,-50%);
+    background-color: $color-white;
+    padding: 3rem ;
+    padding-top: 0;
+    border-radius: 0.5rem;
+    @include mediumSize(){
+        top:40%;
+    }
+ &__header{
+    text-align: center;
+    padding: 3rem 1rem 0 1rem;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid $color-dark;
+    font-weight: 900;
+    font-style: italic;
+ }
+&__form{
+    &-input{
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid rgba($color-dark, 0.5) ;
+        font-size: 1.5rem;
+        border-radius: 0.3rem;
+    }
+    &-btn{
+        margin-top: 2rem;
+        padding: 0.75rem 2rem;
+        background-color: rgba($color-dark, 0.5);
+        border: none;
+        border-radius: 0.5rem;
+        color: $color-white;
+        font-size: 1rem;
+        font-style: italic;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba($color-dark, 1);
+        }
+    }
+}
+}

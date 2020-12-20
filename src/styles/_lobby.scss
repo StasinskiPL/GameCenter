@@ -15,7 +15,14 @@
       font-weight: 900;
       font-style: italic;
     }
+    &-btnWrapper{
+      display: none;
+      @include mediumSize(){
+        display: initial;
+      }
+    }
   }
+  
 
   &-btn {
     font-family: inherit;

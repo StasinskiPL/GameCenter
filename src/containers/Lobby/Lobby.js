@@ -1,49 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Chat from "../../components/Chat/Chat";
+import React, {useEffect } from "react";
 import { useGamesContext } from "../../context/GamesContextProvider";
+import { useSocket } from "../../context/SocketProvider";
+import useUserNick from "../../hooks/useUserNick";
+import useUserId from "../../hooks/useUserId";
+import LobbyLink from "./LobbyLink";
+import LobbyBody from "./LobbyBody";
+import LobbyHeader from "./LobbyHeader";
 
-const Lobby = ({ location}) => {
-  const { game: title } = useParams();
-  const [isEnemy, setIsEnemy] = useState(false);
+const Lobby = ({ location }) => {
+  const [nick] = useUserNick();
   const { currentRoom, setCurrentRoom } = useGamesContext();
   const room = new URLSearchParams(location.search).get("room");
-
+  const id =useUserId();
+  const { socket } = useSocket();
 
   useEffect(() => {
-    if(currentRoom !== room){
+    if (currentRoom !== room) {
       setCurrentRoom(room);
     }
-  }, [room,setCurrentRoom,currentRoom]);
+    if (socket && nick && nick.trim() !== "") {
+      socket.emit("createRoom", { room: currentRoom, player:{nick,id} });
+    }
+  }, [room, setCurrentRoom, currentRoom, socket, nick,id]);
 
-  const copyHandler = () => {
-    navigator.clipboard.writeText(window.location.href);
-  };
 
   return (
-    <section className="lobby">
-      <div className="lobby__center">
-        <div className="lobby-header">
-          {" "}
-          <h1> {title}</h1>
-          <button className={`lobby-btn ${!isEnemy && "disable"} `}>
-            {"Start Game ->"}
-          </button>
+    <>
+      <section className="lobby">
+        <div className="lobby__center">
+          <LobbyHeader />
+          <LobbyLink />
+          <LobbyBody />
         </div>
-        <div className="lobby__link">
-          <div className="lobby__link-box">
-            <h1>Invite a friend</h1>
-          </div>{" "}
-          <p>{window.location.href}</p>{" "}
-          <button onClick={copyHandler}>Copy Link</button>
-        </div>
-        <div className="lobby__body">
-          {/* rules */}
-          <div></div>
-          <Chat />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

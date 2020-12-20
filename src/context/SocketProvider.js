@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import {useGamesContext} from "./GamesContextProvider"
 import { io } from "socket.io-client";
 
 const SocketContext = React.createContext();
 
 const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
-
-  const {currentRoom} = useGamesContext();
-
-  const sendMessage = (msg) => {
-    socket.emit("sendMessage", {msg, room:currentRoom});
-  };
 
   useEffect(() => {
     const createSocket = io("http://localhost:5050",{
@@ -24,7 +17,7 @@ const SocketProvider = ({ children }) => {
     
   }, []);
   return (
-    <SocketContext.Provider value={{ socket, sendMessage,  }}>
+    <SocketContext.Provider value={{socket}}>
       {children}
     </SocketContext.Provider>
   );

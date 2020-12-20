@@ -1,0 +1,31 @@
+.players{
+display: grid;
+grid-template-rows: auto 1fr auto;
+
+    &__header{
+        text-align: center;
+        margin-bottom: 1rem;
+        & h1{
+            text-transform: uppercase;
+            
+        }
+    }
+}
+
+.player{
+    width: 100%;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(0,0,0, 0.2);
+    border-radius: 0.2rem;
+    margin-bottom: 0.5rem;
+    &-nick{
+        display: flex;
+        align-items: baseline;
+        gap: 3px;
+    }
+    &-you{
+        font-weight: 400;
+        font-size: 1.125rem;
+    }
+}
