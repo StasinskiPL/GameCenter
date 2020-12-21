@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGamesContext } from "../context/GamesContextProvider";
 import { useSocket } from "../context/SocketProvider";
 import useUserNick from "../hooks/useUserNick";
 import useUserId from "../hooks/useUserId";
 import Player from "./Player";
-import StartGameBtn from "./StartGameBtn";
 
 const PlayersList = () => {
-  const [players, setPlayers] = useState([]);
   const { socket } = useSocket();
   const [nick] = useUserNick();
   const id = useUserId();
-  const { currentRoom, setNumbersOfPlayers } = useGamesContext();
+  const { currentRoom, setNumbersOfPlayers,setPlayers,players } = useGamesContext();
 
   useEffect(() => {
     if (socket && currentRoom && nick && id) {
@@ -34,7 +32,7 @@ const PlayersList = () => {
         socket.removeListener("getPlayers");
       }
     };
-  }, [socket, id, nick, currentRoom, players.length, setNumbersOfPlayers]);
+  }, [socket, id, nick,setPlayers, currentRoom, players.length, setNumbersOfPlayers]);
 
   return (
     <div className="players">
@@ -46,9 +44,8 @@ const PlayersList = () => {
           <Player key={player.id} player={player} />
         ))}
       </ul>
-      <StartGameBtn />
     </div>
   );
 };
 
-export default PlayersList;
+export default (PlayersList);

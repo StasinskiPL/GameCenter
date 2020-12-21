@@ -13,4 +13,4 @@ const Player = ({player}) => {
     )
 }
 
-export default Player
+export default React.memo(Player)

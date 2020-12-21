@@ -22,6 +22,11 @@
       }
     }
   }
+
+  &__players{
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
   
 
   &-btn {

@@ -2,6 +2,10 @@
 @import "uiUtilities";
 @import "chat";
 @import "navbar";
+@import "game";
+@import "./Games/ConnectFour";
+@import "./Games/Tictactoe";
 @import "playerList";
+@import "currentPlayer";
 @import "games";
 @import "lobby";

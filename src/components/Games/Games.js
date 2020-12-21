@@ -1,5 +1,5 @@
 import React from "react";
-import GameCard from "../../components/GameCard";
+import GameCard from "../GameCard";
 
 const gamesList = [
   {
@@ -8,7 +8,7 @@ const gamesList = [
   },
   {
     title: "TicTacToe",
-    img: "https://upload.wikimedia.org/wikipedia/en/a/a4/Connect_four_game.svg",
+    img: "https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe.png",
   },
   {
     title: "War",
