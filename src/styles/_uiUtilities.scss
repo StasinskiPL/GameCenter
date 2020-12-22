@@ -104,6 +104,23 @@
                 background: linear-gradient(rgba($color-dark, 0.5), rgba($color-dark,0.7));
             }
         }
-    }
 
+    }
+    &-btn{
+        border: none;
+        background-color: transparent;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 1.25rem;
+        text-transform: uppercase;
+        padding: 0.125rem 1rem;
+        border-radius: 50rem;
+        color: $color-dark;
+        transition: all 0.3s;
+        cursor: pointer;
+        &:hover{
+            color:rgba($color-dark, 0.7);
+            background-color: rgba($color-dark, 0.5);
+        }
+    }
 }

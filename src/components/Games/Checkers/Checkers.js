@@ -5,6 +5,7 @@ import GameLayout from "../../../hoc/GameLayout";
 import useUserId from "../../../hooks/useUserId";
 import CheckersCell from "./CheckersCell";
 import { initGrid, movePawn } from "./CheckersLogic";
+import Setting from "../../Setting";
 
 const Checkers = () => {
   const [grid, setGrid] = useState(initGrid());
@@ -67,8 +68,6 @@ const Checkers = () => {
   };
 
   const gridDragStart = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
     const index = +e.target.closest("div").dataset.index;
     const cell = grid[index];
     const userIndex = players.findIndex((p) => p.id === userId);
@@ -83,7 +82,6 @@ const Checkers = () => {
   };
 
   const gridDragEnterHandler = (e) => {
-    console.log("wwwwww")
     if (currentPawn) {
       const index = +e.target.closest("div").dataset.index;
       const cell = grid[index];
@@ -118,6 +116,17 @@ const Checkers = () => {
     
   };
 
+  const restCheckers = () =>{
+    socket.emit("restart", {room:currentRoom})
+
+  }
+
+  const resetBtn = (
+    <button onClick={restCheckers} className="setting-btn">
+      Reset
+    </button>
+  )
+
   return (
     <GameLayout>
       <div className="checkers">
@@ -139,6 +148,7 @@ const Checkers = () => {
             ))}
           </div>
         </div>
+        <Setting name="reset:" btn={resetBtn}/>
       </div>
     </GameLayout>
   );
