@@ -6,10 +6,12 @@ import TicTacToe from "./components/Games/TicTacToe/TicTacToe";
 import Lobby from "./containers/Lobby/Lobby";
 import SetNick from "./Ui/Modals/SetNick";
 import ConnectFour from "./components/Games/ConnectFour/ConnectFour";
+import Checkers from "./components/Games/Checkers/Checkers";
 
 
 function App() {
   const [nick] = useUserNick();
+  
 
 
   if(!nick){
@@ -29,6 +31,7 @@ return (
       <Route path="/" exact component={Games}/>
       <Route path="/TicTacToe"  component={TicTacToe}/>
       <Route path="/ConnectFour"  component={ConnectFour}/>
+      <Route path="/Checkers"  component={Checkers}/>
       <Route path="/lobby/:game" component={Lobby}/>
       </Switch>
     </main>

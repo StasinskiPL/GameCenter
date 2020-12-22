@@ -12,4 +12,4 @@ const ConnectFourCell = ({cell, nextcolor}) => {
     )
 }
 
-export default ConnectFourCell
+export default React.memo(ConnectFourCell)

@@ -11,8 +11,8 @@ const gamesList = [
     img: "https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe.png",
   },
   {
-    title: "War",
-    img: "https://upload.wikimedia.org/wikipedia/en/a/a4/Connect_four_game.svg",
+    title: "Checkers",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Chess.board.fabric.png/300px-Chess.board.fabric.png",
   },
 ];
 

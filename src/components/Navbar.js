@@ -1,11 +1,15 @@
-import React from 'react'
-import {Link} from "react-router-dom";
+import React from 'react';
+import {useGamesContext} from "../context/GamesContextProvider";
 
 const Navbar = () => {
+
+
+    const {redirectToHome} = useGamesContext();
+
     return (
        <nav className="navbar">
            <div className="navbar__center">
-                <Link to="/">GameCenter</Link>
+                <button onClick={redirectToHome} >GameCenter</button>
            </div>
        </nav>
     )

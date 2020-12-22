@@ -5,9 +5,19 @@ import { useSocket } from "../context/SocketProvider";
 import { useGamesContext } from "../context/GamesContextProvider";
 
 
+
+
 const GameLayout = ({ children}) => {
+ 
   const { socket } = useSocket();
-  const {currentRoom} = useGamesContext();
+  const {currentRoom,redirectToHome} = useGamesContext();
+
+
+ useEffect(() => {
+   if(!currentRoom){
+    redirectToHome()
+   }     
+ }, [currentRoom,redirectToHome])
 
   const[gameResult, setGameResult] = useState(null);
 
@@ -16,12 +26,11 @@ const GameLayout = ({ children}) => {
 
   },[socket,currentRoom]);
 
+
   useEffect(() => {
     if (socket) {
-    
       socket.on("restart", ()=>{
         setGameResult(null);
-
       })
       socket.on("gameResult", ({ result, winner }) => {
         if (result === "DRAW") {
@@ -42,6 +51,15 @@ const GameLayout = ({ children}) => {
               </button>
             </div>
           );
+        }else if (result === "OPPONENTLEFT"){
+          setGameResult(
+            <div className="game__result">
+              <h1>{"Your Opponent Left :("}</h1>
+              <button onClick={redirectToHome} className="game__result-btn">
+                Back to home
+              </button>
+            </div>
+          )
         }
       });
       return () => {
@@ -50,14 +68,13 @@ const GameLayout = ({ children}) => {
         }
       };
     }
-  }, [socket, startNewGame]);
+  }, [socket, startNewGame,redirectToHome]);
 
   return (
     <section className="game">
       <div className="game__center">
         <div className="game__content">
         <CurrentPlayer />
-
           {gameResult}
           {children}
         </div>

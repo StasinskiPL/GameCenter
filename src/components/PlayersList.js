@@ -34,6 +34,19 @@ const PlayersList = () => {
     };
   }, [socket, id, nick,setPlayers, currentRoom, players.length, setNumbersOfPlayers]);
 
+  useEffect(() => {
+    if(socket){
+      socket.on("userLeave", ({userId})=>{
+        setPlayers(state => state.filter(p => p.id !== userId))
+      })
+    }
+    return () => {
+      if(socket){
+        socket.removeListener("userLeave")   
+      }
+    }
+  }, [socket,id,setPlayers])
+
   return (
     <div className="players">
       <div className="players__header">

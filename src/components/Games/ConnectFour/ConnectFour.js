@@ -25,15 +25,15 @@ const ConnectFour = () => {
 
   useEffect(() => {
     if (socket) {
-        socket.on("changeGravitation",({value})=>{
-            setGravitation(value)
-        })
-    
+      socket.on("changeGravitation", ({ value }) => {
+        setGravitation(value);
+      });
+
       socket.on("restart", () => {
         setGrid(init());
       });
       socket.on("ConnectFourCellTaken", ({ id }) => {
-          console.log(id)
+        console.log(id);
         setGrid((c) =>
           c.map((cell) => {
             if (cell.id === id) {
@@ -61,33 +61,40 @@ const ConnectFour = () => {
         cellId: cellId,
         userId: userId,
         players: players,
-        color:nextColor,
-        gravitation:gravitation,
+        color: nextColor,
+        gravitation: gravitation,
       });
     }
   };
 
-  const changeGravitation = (value) =>{
-      socket.emit("changeGravitation", {room:currentRoom, value:value})
-  }
-
-  
+  const changeGravitation = (value) => {
+    socket.emit("changeGravitation", { room: currentRoom, value: value });
+  };
 
   const gravitationBtn = (
-      <div className="setting-toggle">
-          <span onClick={()=>changeGravitation(true)} className={`${gravitation && "active"}`}>TRUE</span>
-          <span onClick={()=>changeGravitation(false)} className={`${!gravitation && "active"}`}>FALSE</span>
-      </div>
-  )
+    <div className="setting-toggle">
+      <span
+        onClick={() => changeGravitation(true)}
+        className={`${gravitation && "active"}`}
+      >
+        TRUE
+      </span>
+      <span
+        onClick={() => changeGravitation(false)}
+        className={`${!gravitation && "active"}`}
+      >
+        FALSE
+      </span>
+    </div>
+  );
 
   return (
     <GameLayout>
-      <div className="connectFour" nextcolor={nextColor} onClick={gridClickedHandler}>
-        {grid.map((cell) => (
-          <ConnectFourCell key={cell.id} cell={cell} />
-        ))}
+      <div className="connectFour" nextcolor={nextColor}
+        onClick={gridClickedHandler}>
+        {grid.map((cell) =>(<ConnectFourCell key={cell.id} cell={cell} />))}
       </div>
-      <Setting name="Gravitation: " btn={gravitationBtn}/>
+      <Setting name="Gravitation: " btn={gravitationBtn} />
     </GameLayout>
   );
 };

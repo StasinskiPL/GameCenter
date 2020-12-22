@@ -9,7 +9,7 @@ import LobbyHeader from "./LobbyHeader";
 
 const Lobby = ({ location }) => {
   const [nick] = useUserNick();
-  const { currentRoom, setCurrentRoom } = useGamesContext();
+  const { currentRoom, setCurrentRoom} = useGamesContext();
   const room = new URLSearchParams(location.search).get("room");
   const id =useUserId();
   const { socket } = useSocket();
@@ -22,6 +22,8 @@ const Lobby = ({ location }) => {
       socket.emit("createRoom", { room: currentRoom, player:{nick,id} });
     }
   }, [room, setCurrentRoom, currentRoom, socket, nick,id]);
+
+  
 
 
   return (

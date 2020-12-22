@@ -33,7 +33,7 @@ const CurrentPlayer = ({ children }) => {
       <h1>
         Turn:
         <span className="currentPlayer-nick"> {playerTurn.nick}</span>
-        {playerTurn.id === userId ? <span className="currentPlayer-your">(Your)</span> : null}
+        {playerTurn.id === userId ? <span className="currentPlayer-your">(You)</span> : null}
       </h1>
     );
   }
