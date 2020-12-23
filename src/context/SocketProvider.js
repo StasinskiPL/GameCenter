@@ -7,7 +7,7 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const createSocket = io("http://localhost:5050", {
+    const createSocket = io("https://gamescenter-server.herokuapp.com/", {
       query: {
         id: Math.random(),
       },
