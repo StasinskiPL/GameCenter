@@ -15,6 +15,10 @@ const Lobby = ({ location }) => {
   const { socket } = useSocket();
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
+  useEffect(() => {
     if (currentRoom !== room) {
       setCurrentRoom(room);
     }
