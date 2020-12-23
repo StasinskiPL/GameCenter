@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { useGamesContext } from "../../context/GamesContextProvider";
 import { useSocket } from "../../context/SocketProvider";
 import useUserNick from "../../hooks/useUserNick";
@@ -9,9 +9,9 @@ import LobbyHeader from "./LobbyHeader";
 
 const Lobby = ({ location }) => {
   const [nick] = useUserNick();
-  const { currentRoom, setCurrentRoom} = useGamesContext();
+  const { currentRoom, setCurrentRoom } = useGamesContext();
   const room = new URLSearchParams(location.search).get("room");
-  const id =useUserId();
+  const id = useUserId();
   const { socket } = useSocket();
 
   useEffect(() => {
@@ -19,12 +19,9 @@ const Lobby = ({ location }) => {
       setCurrentRoom(room);
     }
     if (socket && nick && nick.trim() !== "") {
-      socket.emit("createRoom", { room: currentRoom, player:{nick,id} });
+      socket.emit("createRoom", { room: currentRoom, player: { nick, id } });
     }
-  }, [room, setCurrentRoom, currentRoom, socket, nick,id]);
-
-  
-
+  }, [room, setCurrentRoom, currentRoom, socket, nick, id]);
 
   return (
     <>

@@ -1,9 +1,8 @@
 const isPawn = (id) => {
-    if ((id < 20 || (id > 30 && id < 40)) && id % 2 === 0) {
+  if ((id < 20 || (id > 30 && id < 40)) && id % 2 === 0) {
     return "PAWN_BLACK";
   } else if (id > 20 && id < 30 && id % 2 === 1) {
     return "PAWN_BLACK";
-    // return "PAWN_WHITE";
   } else if (((id > 60 && id < 70) || id > 80) && id % 2 === 1) {
     return "PAWN_WHITE";
   } else if (id > 70 && id < 80 && id % 2 === 0) {
@@ -34,7 +33,7 @@ export const initGrid = () =>
     quenn: false,
   }));
 
-export const possibleMoves = (grid, pawn) => { };
+export const possibleMoves = (grid, pawn) => {};
 
 const move = (grid, cell, pawn) => {
   grid[cell.index].pawn = grid[pawn.index].pawn;
@@ -58,7 +57,6 @@ const flipCellWithRemove = (grid, cell, cellToRemove, pawn) => {
 const moveQuennOneSqr = (grid, pawnCell, position, target, ods) => {
   const updatedPosition = position + ods;
   const updatedPositionCell = grid.find((p) => p.id === updatedPosition);
- 
 
   if (updatedPosition < 10 || updatedPosition > 88) {
     return null;

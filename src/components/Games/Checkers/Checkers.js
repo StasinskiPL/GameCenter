@@ -15,6 +15,7 @@ const Checkers = () => {
   const { socket } = useSocket();
   const userId = useUserId();
   const { currentRoom, playerTurn, players } = useGamesContext();
+  const userIndex = players.findIndex((p) => p.id === userId);
 
   useEffect(() => {
     if (socket) {
@@ -36,7 +37,6 @@ const Checkers = () => {
   const gridClickedHandler = (e) => {
     const index = +e.target.closest("div").dataset.index;
     const cell = grid[index];
-    const userIndex = players.findIndex((p) => p.id === userId);
 
     if (
       cell &&
@@ -70,7 +70,6 @@ const Checkers = () => {
   const gridDragStart = (e) => {
     const index = +e.target.closest("div").dataset.index;
     const cell = grid[index];
-    const userIndex = players.findIndex((p) => p.id === userId);
     if (
       cell &&
       cell.pawn &&
@@ -85,13 +84,14 @@ const Checkers = () => {
     if (currentPawn) {
       const index = +e.target.closest("div").dataset.index;
       const cell = grid[index];
-      if(!dragCurrentCell || (dragCurrentCell &&  index !== dragCurrentCell.index)){
+      if (
+        !dragCurrentCell ||
+        (dragCurrentCell && index !== dragCurrentCell.index)
+      ) {
         setDragCurrentCell(cell);
       }
     }
   };
-
- 
 
   const gridDragEnd = () => {
     if (
@@ -113,26 +113,24 @@ const Checkers = () => {
     }
     setCurrentPawn(null);
     setDragCurrentCell(null);
-    
   };
 
-  const restCheckers = () =>{
-    socket.emit("restart", {room:currentRoom})
-
-  }
+  const restCheckers = () => {
+    socket.emit("restart", { room: currentRoom });
+  };
 
   const resetBtn = (
     <button onClick={restCheckers} className="setting-btn">
       Reset
     </button>
-  )
+  );
 
   return (
     <GameLayout>
       <div className="checkers">
         <div className="checkers__center">
           <div
-            className="checkers__grid"
+            className={`checkers__grid ${userIndex === 1 && "reversed"}`}
             onMouseDown={(e) => gridDragStart(e)}
             onMouseUp={() => gridDragEnd()}
             onMouseOver={(e) => gridDragEnterHandler(e)}
@@ -144,11 +142,12 @@ const Checkers = () => {
                 dragCurrentCell={dragCurrentCell ? dragCurrentCell.id : ""}
                 cell={cell}
                 key={cell.id}
+                reversed={userIndex === 1}
               />
             ))}
           </div>
         </div>
-        <Setting name="reset:" btn={resetBtn}/>
+        <Setting name="reset:" btn={resetBtn} />
       </div>
     </GameLayout>
   );

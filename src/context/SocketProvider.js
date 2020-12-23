@@ -7,17 +7,16 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const createSocket = io("http://localhost:5050",{
-    query:{
+    const createSocket = io("http://localhost:5050", {
+      query: {
         id: Math.random(),
-    }
+      },
     });
     setSocket(createSocket);
-    return ()=> createSocket.close();
-    
+    return () => createSocket.close();
   }, []);
   return (
-    <SocketContext.Provider value={{socket}}>
+    <SocketContext.Provider value={{ socket }}>
       {children}
     </SocketContext.Provider>
   );

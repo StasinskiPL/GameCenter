@@ -31,9 +31,11 @@ const StartGameBtn = () => {
      socket.emit("gameStarted", {room:currentRoom,players:players })
     }
   }
+
+  const title = numbersOfPlayers < 2 ? "You need opponent to start a game" : null;
   
     return (
-        <button onClick={startGameHandler} className={`lobby-btn ${numbersOfPlayers <2 && "disable"} `}>
+        <button title={title}  onClick={startGameHandler} className={`lobby-btn ${numbersOfPlayers <2 && "disable"} `}>
         {"Start Game ->"}
       </button>
     )

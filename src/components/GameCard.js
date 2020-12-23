@@ -5,10 +5,12 @@ const GameCard = ({ game }) => {
   const { title, img } = game;
   return (
     <div className="gameCard">
-      <Link to={{
+      <Link
+        to={{
           pathname: `/lobby/${title}`,
           search: `?room=${new Date().getTime()}`,
-      }}>
+        }}
+      >
         <div className="gameCard__img-container">
           <img src={img} alt="" />
         </div>

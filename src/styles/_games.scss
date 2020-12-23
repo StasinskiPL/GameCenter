@@ -1,16 +1,20 @@
 .games {
   padding: 5rem 0;
+
   &__center {
     @include maxWidth;
     display: grid;
     padding: 0.5rem;
     gap: 1.5rem;
+
     @include mediaQuery("550px") {
       grid-template-columns: 1fr 1fr;
     }
+
     @include mediumSize {
       grid-template-columns: 1fr 1fr 1fr;
     }
+
     @include deskopSize {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
@@ -25,6 +29,7 @@
   & a {
     @include link;
   }
+
   &__img-container {
     background-color: $color-main-dark;
 
@@ -35,6 +40,7 @@
       object-fit: cover;
     }
   }
+
   &__info {
     @include darkOnHover;
 
@@ -55,6 +61,7 @@
       font-weight: 900;
       font-style: italic;
     }
+
     & h2 {
       font-size: 1.25rem;
     }

@@ -1,43 +1,42 @@
-.connectFour{
+.connectFour {
     height: 400px;
     background-color: $color-white;
     border: 4px solid $color-dark;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    @include mediumSize(){
+
+    @include mediumSize() {
         height: 460px;
     }
 }
 
-
-.connectFourCell{
+.connectFourCell {
     transition: all 300ms linear;
     border: 2px solid $color-dark;
 
-    &.RED{
+    &.RED {
         background-color: rgb(235, 89, 89);
     }
-    &.GREEN{
+
+    &.GREEN {
         background-color: rgb(85, 212, 85);
     }
-    &.notTaken{
-         transition: all 500ms ease-in;
+
+    &.notTaken {
+        transition: all 500ms ease-in;
 
         cursor: pointer;
 
-        &.nextRed{
-            &:hover{
-        background-color: rgba(235, 89, 89, 0.8);
-            }
-        }
-        &.nextGreen{
-            &:hover{
-            background-color: rgba(85, 212, 85 , 0.8);
+        &.nextRed {
+            &:hover {
+                background-color: rgba(235, 89, 89, 0.8);
             }
         }
 
+        &.nextGreen {
+            &:hover {
+                background-color: rgba(85, 212, 85, 0.8);
+            }
+        }
     }
-    
-
-
 }

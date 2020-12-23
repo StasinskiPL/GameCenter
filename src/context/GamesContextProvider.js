@@ -10,16 +10,14 @@ const GamesContextProvider = ({ children }) => {
   const [numbersOfPlayers, setNumbersOfPlayers] = useState(1);
   const history = useHistory();
 
-  const redirectToHome = () =>{
+  const redirectToHome = () => {
     history.push("/");
-    setCurrentRoom(null)
-    setPlayerTurn("")
-    setPlayers([])
-    setNumbersOfPlayers(1)
+    setCurrentRoom(null);
+    setPlayerTurn("");
+    setPlayers([]);
+    setNumbersOfPlayers(1);
     window.location.reload();
-
-    
-  }
+  };
 
   return (
     <GamesContext.Provider
@@ -33,7 +31,6 @@ const GamesContextProvider = ({ children }) => {
         redirectToHome,
         setNumbersOfPlayers,
         numbersOfPlayers,
-       
       }}
     >
       {children}

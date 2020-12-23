@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import useUserNick from "../../hooks/useUserNick";
 import Backdrop from "../Backdrop";
 const SetNick = () => {
- 
   const [userInput, setUserInput] = useState("");
   const [nick, setNick] = useUserNick();
   const [showNickModal, setshowNickModal] = useState(true);
@@ -11,8 +10,7 @@ const SetNick = () => {
     e.preventDefault();
     if (userInput !== "") {
       setNick(userInput);
-      // eslint-disable-next-line no-self-assign
-      window.location.href=window.location.href;
+      window.location.reload();
     }
   };
 

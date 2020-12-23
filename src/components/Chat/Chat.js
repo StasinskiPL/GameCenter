@@ -8,25 +8,23 @@ import { useGamesContext } from "../../context/GamesContextProvider";
 const Chat = () => {
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([]);
-  const {currentRoom} = useGamesContext();
+  const { currentRoom } = useGamesContext();
   const userId = useUserId();
-  const [nick ] = useUserNick();
+  const [nick] = useUserNick();
 
-
-  const {socket } = useSocket();
+  const { socket } = useSocket();
   useEffect(() => {
     if (socket && currentRoom) {
-      socket.on(`getMessage/${currentRoom}`, ({msg}) => {
-        setMessages(items=>items.concat(msg))
+      socket.on(`getMessage/${currentRoom}`, ({ msg }) => {
+        setMessages((items) => items.concat(msg));
       });
     }
-    return ()=>{
-      if(socket){
-        socket.removeListener(`getMessage/${currentRoom}`)
+    return () => {
+      if (socket) {
+        socket.removeListener(`getMessage/${currentRoom}`);
       }
-    } 
-   
-  }, [socket,currentRoom]);
+    };
+  }, [socket, currentRoom]);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
@@ -34,10 +32,10 @@ const Chat = () => {
       const msgObj = {
         text: msg,
         authorId: userId,
-        authorNick : nick,
+        authorNick: nick,
         id: new Date().getTime(),
       };
-      socket.emit("sendMessage", {msg:msgObj, room:currentRoom});
+      socket.emit("sendMessage", { msg: msgObj, room: currentRoom });
       setMsg("");
     }
   };

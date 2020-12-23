@@ -9,7 +9,12 @@ const PlayersList = () => {
   const { socket } = useSocket();
   const [nick] = useUserNick();
   const id = useUserId();
-  const { currentRoom, setNumbersOfPlayers,setPlayers,players } = useGamesContext();
+  const {
+    currentRoom,
+    setNumbersOfPlayers,
+    setPlayers,
+    players,
+  } = useGamesContext();
 
   useEffect(() => {
     if (socket && currentRoom && nick && id) {
@@ -19,8 +24,11 @@ const PlayersList = () => {
           if (exist) {
             return state;
           } else {
-            if(player.id !== id)
-            socket.emit("createRoom",{room: currentRoom,player: { nick, id }});
+            if (player.id !== id)
+              socket.emit("createRoom", {
+                room: currentRoom,
+                player: { nick, id },
+              });
             return state.concat(player);
           }
         });
@@ -32,20 +40,28 @@ const PlayersList = () => {
         socket.removeListener("getPlayers");
       }
     };
-  }, [socket, id, nick,setPlayers, currentRoom, players.length, setNumbersOfPlayers]);
+  }, [
+    socket,
+    id,
+    nick,
+    setPlayers,
+    currentRoom,
+    players.length,
+    setNumbersOfPlayers,
+  ]);
 
   useEffect(() => {
-    if(socket){
-      socket.on("userLeave", ({userId})=>{
-        setPlayers(state => state.filter(p => p.id !== userId))
-      })
+    if (socket) {
+      socket.on("userLeave", ({ userId }) => {
+        setPlayers((state) => state.filter((p) => p.id !== userId));
+      });
     }
     return () => {
-      if(socket){
-        socket.removeListener("userLeave")   
+      if (socket) {
+        socket.removeListener("userLeave");
       }
-    }
-  }, [socket,id,setPlayers])
+    };
+  }, [socket, id, setPlayers]);
 
   return (
     <div className="players">
@@ -61,4 +77,4 @@ const PlayersList = () => {
   );
 };
 
-export default (PlayersList);
+export default PlayersList;

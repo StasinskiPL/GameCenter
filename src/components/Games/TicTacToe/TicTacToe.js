@@ -12,19 +12,19 @@ const initArr = new Array(9).fill().map((_, index) => {
 });
 
 const TicTacToe = () => {
-  const [cells, setCells] = useState(initArr);
+  const [grid, setGrid] = useState(initArr);
   const { socket } = useSocket();
 
   useEffect(() => {
     if (socket) {
-      socket.on("restart", ()=>{
-        setCells(initArr)
-      })
-      socket.on("TicTacToeCellTaken", ({ id, symbol}) => {
-        setCells((c) =>
+      socket.on("restart", () => {
+        setGrid(initArr);
+      });
+      socket.on("TicTacToeCellTaken", ({ id, symbol }) => {
+        setGrid((c) =>
           c.map((cell) => {
             if (cell.id === id) {
-              return { ...cell, taken: true, symbol:symbol };
+              return { ...cell, taken: true, symbol: symbol };
             } else {
               return cell;
             }
@@ -37,27 +37,19 @@ const TicTacToe = () => {
     };
   }, [socket]);
 
-
-  
-
   return (
     <GameLayout>
       <div className="tictactoe">
         <div className="tictactoe__center">
-            <div className="tictactoe__grid">
-            {cells.map((cell) => (
-            <TicTacToeCell cell={cell} grid={cells} key={cell.id} />
-          ))}
-            </div>
-       
+          <div className="tictactoe__grid">
+            {grid.map((cell) => (
+              <TicTacToeCell cell={cell} grid={grid} key={cell.id} />
+            ))}
+          </div>
         </div>
       </div>
     </GameLayout>
   );
 };
-
-
-
- 
 
 export default TicTacToe;

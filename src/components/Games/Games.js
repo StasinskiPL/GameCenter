@@ -8,22 +8,24 @@ const gamesList = [
   },
   {
     title: "TicTacToe",
-    img: "https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe.png",
+    img:
+      "https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe.png",
   },
   {
     title: "Checkers",
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Chess.board.fabric.png/300px-Chess.board.fabric.png",
+    img:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Chess.board.fabric.png/300px-Chess.board.fabric.png",
   },
 ];
 
 const Games = () => {
-  const gameCarts = gamesList.map((game, index) => <GameCard key={index} game={game} />);
+  const gameCarts = gamesList.map((game, index) => (
+    <GameCard key={index} game={game} />
+  ));
 
   return (
     <section className="games">
-      <div className="games__center">
-        {gameCarts}
-      </div>
+      <div className="games__center">{gameCarts}</div>
     </section>
   );
 };

@@ -33,7 +33,6 @@ const ConnectFour = () => {
         setGrid(init());
       });
       socket.on("ConnectFourCellTaken", ({ id }) => {
-        console.log(id);
         setGrid((c) =>
           c.map((cell) => {
             if (cell.id === id) {
@@ -90,9 +89,10 @@ const ConnectFour = () => {
 
   return (
     <GameLayout>
-      <div className="connectFour" nextcolor={nextColor}
-        onClick={gridClickedHandler}>
-        {grid.map((cell) =>(<ConnectFourCell key={cell.id} cell={cell} />))}
+      <div className="connectFour" onClick={gridClickedHandler}>
+        {grid.map((cell) => (
+          <ConnectFourCell key={cell.id} cell={cell} />
+        ))}
       </div>
       <Setting name="Gravitation: " btn={gravitationBtn} />
     </GameLayout>
