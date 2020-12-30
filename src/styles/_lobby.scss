@@ -1,7 +1,9 @@
 .lobby {
   background-color: $color-main;
+
   &__center {
     @include maxWidth;
+    overflow: hidden;
     padding: 5rem 0.5rem;
   }
 
@@ -59,32 +61,42 @@
 
   &__link {
     margin-top: 1rem;
+    overflow: hidden;
     border: 2px solid $color-dark;
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    @include mediumSize() {
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: 1fr;
+    }
 
     &-box {
       background-color: $color-main-dark;
-      padding: 0.25rem 2rem;
-      padding-right: 3.5rem;
-      clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+      padding: 0.25rem 1rem;
+
+      @include mediumSize() {
+        padding-right: 3rem;
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+      }
 
       & h1 {
+        text-align: center;
         font-size: 1.5rem;
-
-        @include mediumSize() {
-          font-size: 2rem;
-        }
       }
     }
 
     & p {
-      display: none;
       color: rgb(30, 0, 112);
+      font-size: 0.75rem;
+      text-align: center;
 
       @include deskopSize() {
-        display: initial;
+        font-size: 1rem;
       }
     }
 
@@ -95,13 +107,12 @@
       background-color: $color-main-dark;
       border: none;
       height: 100%;
-      padding: 0.25rem 2rem;
-      padding-left: 3.5rem;
-      clip-path: polygon(18% 0%, 100% 0, 100% 100%, 0% 100%);
+      padding: 0.25rem 1rem;
       font-size: 1.5rem;
 
       @include mediumSize() {
-        font-size: 2rem;
+        padding-left: 3rem;
+        clip-path: polygon(18% 0%, 100% 0, 100% 100%, 0% 100%);
       }
     }
   }

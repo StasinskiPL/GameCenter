@@ -79,11 +79,12 @@
     &__center {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
 
         & h1 {
             text-transform: uppercase;
             font-style: italic;
+            font-size: 1.25rem;
         }
     }
 

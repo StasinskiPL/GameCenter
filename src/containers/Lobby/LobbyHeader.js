@@ -16,4 +16,4 @@ const LobbyHeader = () => {
     )
 }
 
-export default LobbyHeader
+export default React.memo(LobbyHeader)

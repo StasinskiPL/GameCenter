@@ -15,13 +15,13 @@ const Chat = () => {
   const { socket } = useSocket();
   useEffect(() => {
     if (socket && currentRoom) {
-      socket.on(`getMessage/${currentRoom}`, ({ msg }) => {
+      socket.on("getMessage", ({ msg }) => {
         setMessages((items) => items.concat(msg));
       });
     }
     return () => {
       if (socket) {
-        socket.removeListener(`getMessage/${currentRoom}`);
+        socket.removeListener("getMessage");
       }
     };
   }, [socket, currentRoom]);
@@ -58,4 +58,4 @@ const Chat = () => {
   );
 };
 
-export default React.memo(Chat);
+export default Chat;

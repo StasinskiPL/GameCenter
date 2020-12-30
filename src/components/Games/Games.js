@@ -1,20 +1,22 @@
 import React from "react";
 import GameCard from "../GameCard";
+import ConnectFourImg from "./images/Connect_four.svg"
+import ChessBoardImg from "./images/chess.webp"
+import TicTacToeImg from "./images/tic-toe.webp"
+
 
 const gamesList = [
   {
     title: "ConnectFour",
-    img: "https://upload.wikimedia.org/wikipedia/en/a/a4/Connect_four_game.svg",
+    img:ConnectFourImg,
   },
   {
     title: "TicTacToe",
-    img:
-      "https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe.png",
+    img:TicTacToeImg,
   },
   {
     title: "Checkers",
-    img:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Chess.board.fabric.png/300px-Chess.board.fabric.png",
+    img:ChessBoardImg,
   },
 ];
 
