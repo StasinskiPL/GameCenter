@@ -12,7 +12,7 @@ const GameCard = ({ game }) => {
         }}
       >
         <div className="gameCard__img-container">
-          <img src={img} alt="" />
+          <img loading="lazy" src={img} alt="gameImage" />
         </div>
         <div className="gameCard__info">
           <h1 className="gameCard__info-title">{title}</h1>

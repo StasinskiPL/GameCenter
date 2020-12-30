@@ -1,12 +1,14 @@
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import useUserNick from "./hooks/useUserNick";
 import Navbar from "./components/Navbar";
 import Games from "./components/Games/Games";
-import TicTacToe from "./components/Games/TicTacToe/TicTacToe";
-import Lobby from "./containers/Lobby/Lobby";
 import SetNick from "./Ui/Modals/SetNick";
-import ConnectFour from "./components/Games/ConnectFour/ConnectFour";
-import Checkers from "./components/Games/Checkers/Checkers";
+
+const Lobby = React.lazy(() => import("./containers/Lobby/Lobby"));
+const TicTacToe = React.lazy(() => import("./components/Games/TicTacToe/TicTacToe"));
+const ConnectFour = React.lazy(() => import("./components/Games/ConnectFour/ConnectFour"));
+const Checkers = React.lazy(() => import("./components/Games/Checkers/Checkers"));
 
 function App() {
   const [nick] = useUserNick();
@@ -24,13 +26,15 @@ function App() {
     <main>
       <SetNick />
       <Navbar />
+      <React.Suspense fallback={<span>Loading...</span>}>
       <Switch>
         <Route path="/" exact component={Games} />
-        <Route path="/TicTacToe" component={TicTacToe} />
-        <Route path="/ConnectFour" component={ConnectFour} />
-        <Route path="/Checkers" component={Checkers} />
-        <Route path="/lobby/:game" component={Lobby} />
+        <Route path="/TicTacToe" render={(props) => <TicTacToe {...props} />} />
+        <Route path="/ConnectFour" render={(props) => <ConnectFour {...props} />} />
+        <Route path="/Checkers" render={(props) => <Checkers {...props} />} />
+        <Route path="/lobby/:game" render={(props) => <Lobby {...props} />} />
       </Switch>
+      </React.Suspense>
     </main>
   );
 }

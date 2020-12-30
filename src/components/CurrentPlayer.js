@@ -5,17 +5,8 @@ import useUserId from "../hooks/useUserId";
 
 const CurrentPlayer = ({ children }) => {
   const userId = useUserId();
-  const { setPlayerTurn, setPlayers, playerTurn, players } = useGamesContext();
+  const { setPlayerTurn, playerTurn, players } = useGamesContext();
   const { socket } = useSocket();
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("gamePlayersTurns", ({ players }) => {
-        setPlayers(players);
-        setPlayerTurn(players[0]);
-      });
-    }
-  }, [socket, userId, setPlayerTurn, setPlayers]);
 
   useEffect(() => {
     if (socket) {
@@ -41,7 +32,6 @@ const CurrentPlayer = ({ children }) => {
   return (
     <div className="currentPlayer">
       {turn}
-
       <span>{children}</span>
     </div>
   );
